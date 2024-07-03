@@ -7,3 +7,6 @@ RUN echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
 RUN echo "builders-use-substitutes = true" >> /etc/nix/nix.conf
 # Trust all directory to run flake commands as root on different volumes
 RUN git config --global --add safe.directory '*'
+
+# Copy the setup script
+COPY --chown=root:root --chmod=700 ./setup-remote.sh /setup-remote.sh

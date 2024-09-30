@@ -1,4 +1,4 @@
-FROM nixos/nix:2.24.7
+FROM nixos/nix:2.24.9
 
 # Enable flakes
 RUN echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf

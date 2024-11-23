@@ -2,7 +2,7 @@
 
 set -exEuo pipefail
 
-git featch --tags
+git fetch --tags
 
 nixos_tag="$(
     git tag |

@@ -2,5 +2,9 @@
 
 set -exu
 
-# Log queries, keep foreground and no resolv.conf
-exec dnsmasq -q -k -R "$@"
+# - Log queries
+# - keep foreground
+# - no resolv.conf
+# - no hosts
+# - listen
+exec dnsmasq -q -k -R -h -a 0.0.0.0 "$@"

@@ -4,15 +4,13 @@ set -exEuo pipefail
 
 git fetch --tags
 
-#tag="$(
-#    git tag |
-#        grep '^dnsmasq-' |
-#        sed -e 's/^dnsmasq-//' |
-#        sort -V |
-#        tail -n1
-#)"
-
-tag="0.1.0"
+tag="$(
+    git tag |
+        grep '^dnsmasq-' |
+        sed -e 's/^dnsmasq-//' |
+        sort -V |
+        tail -n1
+)"
 
 docker buildx build \
     --builder=container \

@@ -6,7 +6,7 @@ RUN addgroup -g 1000 user1 \
     && addgroup -g 1001 user2 \
     && adduser -S -D -H -u 1001 -G user2 user2
 
-RUN apk add --no-cache restic
+RUN apk add --no-cache restic openssh
 
 COPY ./entrypoint.sh /entrypoint.sh
 

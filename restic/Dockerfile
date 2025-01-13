@@ -1,4 +1,4 @@
-FROM alpine:3.21.0
+FROM alpine:3.21.2
 
 # Crete the user and group 1000:1000 for the files that could be created
 RUN addgroup -g 1000 user1 \

@@ -1,4 +1,4 @@
-FROM joshuachp/restic-pg:0.1.2
+FROM joshuachp/restic:0.1.2
 
 USER 0:0
 

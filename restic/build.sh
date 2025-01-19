@@ -6,7 +6,7 @@ git fetch --tags
 
 tag="$(
     git tag |
-        grep -v'^restic-pg-' |
+        grep -v '^restic-pg-' |
         grep '^restic-' |
         sed -e 's/^restic-//' |
         sort -V |

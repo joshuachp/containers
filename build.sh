@@ -9,6 +9,7 @@ containers=(
     "dnsmasq"
     "nixos"
     "restic"
+    "restic-pg"
 )
 
 for dir in "${containers[@]}"; do

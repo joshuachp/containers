@@ -4,13 +4,15 @@
 
 set -exEuo pipefail
 
-for file in **/build.sh; do
-    if [[ $file == "build.sh" || ! -x $file ]]; then
-        echo "skipping $file"
-        continue
-    fi
+# Order of dependency
+containers=(
+    "dnsmasq"
+    "nixos"
+    "restic"
+)
 
-    pushd "$(dirname "$file")"
+for dir in "${containers[@]}"; do
+    pushd "$dir"
 
     ./build.sh
 

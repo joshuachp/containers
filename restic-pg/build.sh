@@ -6,8 +6,7 @@ git fetch --tags
 
 tag="$(
     git tag |
-        grep -v'^restic-pg-' |
-        grep '^restic-' |
+        grep '^restic-pg-' |
         sed -e 's/^restic-//' |
         sort -V |
         tail -n1
@@ -16,6 +15,6 @@ tag="$(
 docker buildx build \
     --builder=container \
     --platform=linux/amd64,linux/arm64 \
-    -t "joshuachp/restic:$tag" \
+    -t "joshuachp/restic-pg:$tag" \
     -f Dockerfile \
     --push .

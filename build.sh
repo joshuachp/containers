@@ -12,7 +12,7 @@ for file in **/build.sh; do
 
     pushd "$(dirname "$file")"
 
-    $file
+    ./build.sh
 
     popd
 done

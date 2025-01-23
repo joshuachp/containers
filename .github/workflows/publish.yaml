@@ -32,6 +32,7 @@ jobs:
       - name: Get latest ${{ matrix.container }} tag
         id: tag
         run: |
+          set -x
           tag=$(
             gh release list --repo "${{ github.repository }}" \
                 --exclude-drafts --exclude-pre-releases \

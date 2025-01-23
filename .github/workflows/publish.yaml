@@ -33,7 +33,9 @@ jobs:
         id: tag
         run: |
           tag=$(
-            gh release list --repository "${{ github.repository }}" --json isDraft,isPrerelease,tagName -q '.[] | select(.isDraft or .isPrerelease | not) | .tagName' |
+            gh release list --repo "${{ github.repository }}" \
+                --exclude-drafts --exclude-pre-releases \
+                --json tagName -q '.[].tagName' |
               grep '${{ matrix.container }}-[0-9].[0-9].[0-9]' |
               sort --version-sort |
               tail -n 1 |

@@ -75,9 +75,4 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@v2
-        with:
-          subject-name: joshuachp/${{ matrix.container }}
-          subject-digest: ${{ steps.push.outputs.digest }}
-          push-to-registry: true
+

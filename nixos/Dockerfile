@@ -3,7 +3,7 @@ FROM nixos/nix:2.24.11
 # Enable flakes
 RUN echo -e "experimental-features = nix-command flakes\n\
 builders-use-substitutes = true\n" >> /etc/nix/nix.conf
-# Enable remote builders substitures
+# Enable remote builders substitutes
 # https://nix.dev/manual/nix/2.18/command-ref/conf-file.html?highlight=builders-use-substitutes#conf-builders-use-substitutes
 RUN echo "builders-use-substitutes = true" >> /etc/nix/nix.conf
 # Trust all directory to run flake commands as root on different volumes

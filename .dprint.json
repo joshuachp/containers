@@ -1,0 +1,11 @@
+{
+  "lineWidth": 100,
+  "useTabs": false,
+  "indentWidth": 2,
+  "dockerfile": {
+  },
+  "excludes": [],
+  "plugins": [
+    "https://plugins.dprint.dev/dockerfile-0.3.2.wasm"
+  ]
+}

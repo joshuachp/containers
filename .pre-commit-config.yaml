@@ -13,6 +13,8 @@ repos:
     hooks:
       - id: sh-fmt
       - id: sh-check
+      - id: typos
+      - id: committed
       - id: run-dprint
         types_or:
           - dockerfile

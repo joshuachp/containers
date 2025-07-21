@@ -1,4 +1,4 @@
-FROM alpine:3.22.0
+FROM alpine:3.22.1
 
 # We need the postgres group to exist
 RUN set -eux; \

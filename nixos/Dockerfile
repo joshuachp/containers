@@ -1,4 +1,4 @@
-FROM nixos/nix:2.31.2
+FROM nixos/nix:2.32.1
 
 # Enable flakes
 RUN echo -e "experimental-features = nix-command flakes\n\

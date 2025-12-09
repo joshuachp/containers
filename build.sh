@@ -7,7 +7,6 @@ set -exEuo pipefail
 # Order of dependency
 containers=(
     "dnsmasq"
-    "nixos"
     "restic"
     "restic-pg"
 )

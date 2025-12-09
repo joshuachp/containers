@@ -5,5 +5,3 @@ set -exEuo pipefail
 pre-commit autoupdate
 
 dprint config update
-
-nix flake update

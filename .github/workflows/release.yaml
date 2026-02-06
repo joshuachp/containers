@@ -1,0 +1,26 @@
+name: release
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+jobs:
+  release-please:
+    if: ${{ github.repository_owner == 'joshuachp' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Generate GitHub token
+        uses: actions/create-github-app-token@v2.2.1
+        id: github
+        with:
+          # GitHub App ID secret name
+          app-id: ${{ vars.APP_ID }}
+          # GitHub App private key secret name
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      - uses: googleapis/release-please-action@v4.4.0
+        with:
+          token: ${{ steps.github.outputs.token }}

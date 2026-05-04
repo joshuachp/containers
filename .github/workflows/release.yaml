@@ -22,6 +22,6 @@ jobs:
           app-id: ${{ vars.APP_ID }}
           # GitHub App private key secret name
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
-      - uses: googleapis/release-please-action@v4.4.0
+      - uses: googleapis/release-please-action@v5.0.0
         with:
           token: ${{ steps.github.outputs.token }}

@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: mozilla-actions/sccache-action@v0.0.10
-      - uses: actions-rust-lang/setup-rust-toolchain@v1.15.2
+      - uses: actions-rust-lang/setup-rust-toolchain@v1.16.1
       # tools install
       - uses: taiki-e/install-action@v2.77.6
         with:

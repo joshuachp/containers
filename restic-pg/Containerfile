@@ -1,4 +1,4 @@
-FROM joshuachp/restic:0.1.2
+FROM docker.io/joshuachp/restic:3.24.1
 
 USER 0:0
 

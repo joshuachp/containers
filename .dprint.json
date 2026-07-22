@@ -6,6 +6,6 @@
   },
   "excludes": [],
   "plugins": [
-    "https://plugins.dprint.dev/dockerfile-0.3.3.wasm"
+    "https://plugins.dprint.dev/dockerfile-0.4.1.wasm"
   ]
 }

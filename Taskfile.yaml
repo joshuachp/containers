@@ -1,0 +1,31 @@
+version: 3
+
+output: prefixed
+set: [errexit, nounset, pipefail]
+
+vars:
+  ALPINE: 3.24.1
+
+tasks:
+  build:
+    deps:
+      - pgbouncer
+      - restic
+      - restic-pg
+
+  pgbouncer:
+    cmd: ./scripts/build.sh ./pgbouncer/ docker.io/joshuachp/pgbouncer:{{ .ALPINE }}
+  restic:
+    cmd: ./scripts/build.sh ./restic/ docker.io/joshuachp/restic:{{ .ALPINE }}
+  restic-pg:
+    deps:
+      - restic
+    cmd: ./scripts/build.sh ./restic/ docker.io/joshuachp/restic-pg:{{ .ALPINE }}
+
+  publish:
+    cmds:
+      - for:
+          - docker.io/joshuachp/pgbouncer:{{ .ALPINE }}
+          - docker.io/joshuachp/restic:{{ .ALPINE }}
+          - docker.io/joshuachp/restic-pg:{{ .ALPINE }}
+        cmd: podman push {{ .ITEM }}

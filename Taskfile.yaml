@@ -5,27 +5,87 @@ set: [errexit, nounset, pipefail]
 
 vars:
   ALPINE: 3.24.1
+  NEXTCLOUD: 34.0.2-apache
 
 tasks:
   build:
     deps:
-      - pgbouncer
-      - restic
-      - restic-pg
-
-  pgbouncer:
-    cmd: ./scripts/build.sh ./pgbouncer/ docker.io/joshuachp/pgbouncer:{{ .ALPINE }}
-  restic:
-    cmd: ./scripts/build.sh ./restic/ docker.io/joshuachp/restic:{{ .ALPINE }}
-  restic-pg:
-    deps:
-      - restic
-    cmd: ./scripts/build.sh ./restic/ docker.io/joshuachp/restic-pg:{{ .ALPINE }}
-
+      - pgbouncer-build
+      - restic-build
+      - restic-pg-build
+      - nextcloud-build
   publish:
+    deps:
+      - pgbouncer-publish
+      - restic-publish
+      - restic-pg-publish
+      - nextcloud-publish
+
+  pgbouncer-build:
     cmds:
-      - for:
-          - docker.io/joshuachp/pgbouncer
-          - docker.io/joshuachp/restic
-          - docker.io/joshuachp/restic-pg
-        cmd: podman push {{ .ITEM }}:{{ .ALPINE }}
+      - task: build-container
+        vars:
+          NAME: pgbouncer
+
+  pgbouncer-publish:
+    cmds:
+      - task: publish-container
+        vars:
+          NAME: pgbouncer
+
+  restic-build:
+    cmds:
+      - task: build-container
+        vars:
+          NAME: restic
+  restic-publish:
+    cmds:
+      - task: publish-container
+        vars:
+          NAME: restic
+
+  restic-pg-build:
+    deps:
+      - restic-build
+    cmds:
+      - task: build-container
+        vars:
+          NAME: restic-pg
+  restic-pg-publish:
+    deps:
+      - restic-publish
+    cmds:
+      - task: build-container
+        vars:
+          NAME: restic-pg
+
+  nextcloud-build:
+    cmds:
+      - task: build-container
+        vars:
+          NAME: nextcloud
+  nextcloud-publish:
+    cmds:
+      - task: build-container
+        vars:
+          NAME: nextcloud
+
+  build-container:
+    internal: true
+    requires:
+      vars:
+        - NAME
+    vars:
+      TAG:
+        sh: ./scripts/tag.sh ./{{ .NAME }}/Containerfile
+    cmd: ./scripts/build.sh ./{{ .NAME }}/ docker.io/joshuachp/{{ .NAME }}:{{ .TAG }}
+
+  publish-container:
+    internal: true
+    requires:
+      vars:
+        - NAME
+    vars:
+      TAG:
+        sh: ./scripts/tag.sh ./{{ .NAME }}/Containerfile
+    cmd: podman push docker.io/joshuachp/{{ .NAME }}:{{ .TAG }}

@@ -55,7 +55,7 @@ tasks:
     deps:
       - restic-publish
     cmds:
-      - task: build-container
+      - task: publish-container
         vars:
           NAME: restic-pg
 
@@ -66,7 +66,7 @@ tasks:
           NAME: nextcloud
   nextcloud-publish:
     cmds:
-      - task: build-container
+      - task: publish-container
         vars:
           NAME: nextcloud
 

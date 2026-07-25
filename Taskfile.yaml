@@ -12,8 +12,9 @@ tasks:
     deps:
       - pgbouncer-build
       - restic-build
-      - restic-pg-build
       - nextcloud-build
+      - restic-pg-build
+
   publish:
     deps:
       - pgbouncer-publish
@@ -26,8 +27,9 @@ tasks:
       - task: build-container
         vars:
           NAME: pgbouncer
-
   pgbouncer-publish:
+    deps:
+      - pgbouncer-build
     cmds:
       - task: publish-container
         vars:
@@ -39,6 +41,8 @@ tasks:
         vars:
           NAME: restic
   restic-publish:
+    deps:
+      - restic-build
     cmds:
       - task: publish-container
         vars:
@@ -53,7 +57,7 @@ tasks:
           NAME: restic-pg
   restic-pg-publish:
     deps:
-      - restic-publish
+      - restic-pg-build
     cmds:
       - task: publish-container
         vars:
@@ -65,12 +69,15 @@ tasks:
         vars:
           NAME: nextcloud
   nextcloud-publish:
+    deps:
+      - nextcloud-build
     cmds:
       - task: publish-container
         vars:
           NAME: nextcloud
 
   build-container:
+    prefix: "build-{{ .NAME }}"
     internal: true
     requires:
       vars:
@@ -78,9 +85,10 @@ tasks:
     vars:
       TAG:
         sh: ./scripts/tag.sh ./{{ .NAME }}/Containerfile
-    cmd: ./scripts/build.sh ./{{ .NAME }}/ docker.io/joshuachp/{{ .NAME }}:{{ .TAG }}
+    cmd: ./scripts/build.sh {{ .NAME }} {{ .TAG }}
 
   publish-container:
+    prefix: "publish-{{ .NAME }}"
     internal: true
     requires:
       vars:
@@ -88,4 +96,4 @@ tasks:
     vars:
       TAG:
         sh: ./scripts/tag.sh ./{{ .NAME }}/Containerfile
-    cmd: podman push docker.io/joshuachp/{{ .NAME }}:{{ .TAG }}
+    cmd: ./scripts/push.sh {{ .NAME }} {{ .TAG }}

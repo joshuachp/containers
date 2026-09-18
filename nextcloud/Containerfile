@@ -1,4 +1,4 @@
-FROM --platform=$TARGETPLATFORM docker.io/library/nextcloud:34.0.4-apache
+FROM --platform=$TARGETPLATFORM docker.io/library/nextcloud:35.0.0-apache
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \

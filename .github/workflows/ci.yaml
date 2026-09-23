@@ -24,7 +24,7 @@ jobs:
       - uses: mozilla-actions/sccache-action@v0.0.11
       - uses: actions-rust-lang/setup-rust-toolchain@v2.0.0
       # tools install
-      - uses: taiki-e/install-action@v2.87.13
+      - uses: taiki-e/install-action@v2.87.14
         with:
           tool: dprint,typos-cli
       - run: |

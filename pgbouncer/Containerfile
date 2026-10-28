@@ -1,4 +1,4 @@
-FROM --platform=$TARGETPLATFORM docker.io/library/alpine:3.24.2
+FROM --platform=$TARGETPLATFORM docker.io/library/alpine:3.24.3
 
 # We need the postgres group to exist
 RUN set -eux; \
